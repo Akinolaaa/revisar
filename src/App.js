@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Landing from './routes/landing/landing.component';
+import Authentication from './routes/authentication/authentication.component';
+import DefaultDashboard from './routes/default/default-dashboard/default-dashboard.component';
+import EditorDashboard from './routes/editor/editor-dashboard/editor-dashboard.component';
+import ReviewerDashboard from './routes/reviewer/reviewer-dashboard/reviewer-dashboard.component';
+import EditorDashboardPage2 from './routes/editor/editor-dashboard-page2 copy/editor-dashboard-page2.component';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/'>
+        <Route index element={<Landing />} />
+        <Route path='/auth' element={<Authentication />} />
+        <Route path='/dash' element={<DefaultDashboard />} />
+        <Route path='/editor' >
+          <Route index element={<EditorDashboard />}/>
+          <Route path='/editor/page2' element={<EditorDashboardPage2 />} />
+        </Route>
+        <Route path='/reviewer'>
+          <Route index element={<ReviewerDashboard />}/>
+        </Route>
+      </Route>
+    </Routes>
   );
 }
 
