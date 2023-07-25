@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
-const Dropdown = ({label, dropdownOptions, ...others}) => {
+const Dropdown = ({label, name, dropdownOptions, onSelect, ...others}) => {
   const [ showOptions, setShowOptions ] = useState(false);
   const [ selectedOption, setSelectedOption ] = useState(null);
   const DEFAULT = "--please select an option--";
 
   const toogleDisplay = () => setShowOptions(!showOptions)
+
+  
+  // useEffect(()=>{
+  //   selectOptionHandler()
+  // },[selectedOption,selectOptionHandler]);
 
   const chooseOption = (event) => {
     if(!event.target.innerText) {
@@ -15,6 +20,7 @@ const Dropdown = ({label, dropdownOptions, ...others}) => {
       return;
     }
     setSelectedOption(event.target.innerText);
+    onSelect({ [name]: event.target.innerText });
     toogleDisplay();
   }
 
@@ -24,7 +30,7 @@ const Dropdown = ({label, dropdownOptions, ...others}) => {
 
       <div className="relative w-full cursor-pointer">
         <div className={`flex justify-between items-center overflow-hidden text-sm border rounded border-[#D0BFBF] active:ring-black active:ring-inset px-2 py-1 ${showOptions && "border-2 border-black"}`} onClick={toogleDisplay}>
-          <p className="text-ellipsis overflow-hidden">{ selectedOption ? selectedOption : DEFAULT }</p> 
+          <p className="text-ellipsis overflow-hidden whitespace-nowrap">{ selectedOption ? selectedOption : DEFAULT }</p> 
           <BiChevronDown className={`transition duration-500 ${showOptions && "rotate-180"}`} 
             size={"1.5em"} />
         </div>

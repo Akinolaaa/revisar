@@ -1,12 +1,14 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../store/user/user.selector";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
 import JournalsDashboardSection from "../../../components/journals-dashboard-section/journals-dashboard-section";
 import SubmissionPopup from "../../../components/submission-popup/submission-popup";
 import displayPic from "../../../assets/display-pic.svg";
-import { useState } from "react";
 
 const DefaultDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
-  
+  const { name } = useSelector(selectCurrentUser);
   const togglePopUp = () => setShowPopup(!showPopup)
 
   return (
@@ -28,7 +30,7 @@ const DefaultDashboard = () => {
             <div className="flex gap-2 items-center whitespace-nowrap">
               <img className="h-14 rounded-full" alt="dp" src={displayPic}/>
               <div>
-                <h2 className="capitalize"> Eirene Oyakhilome </h2>
+                <h2 className="capitalize"> { name } </h2>
                 <p className="text-xs text-[#7F5F5F]">
                   <span className="pr-1"> Computer Science </span> <span className="pl-1 border-l border-[#D0BFBF] "> Science </span>
                 </p>
@@ -37,15 +39,15 @@ const DefaultDashboard = () => {
             <div className="flex p-1 border border-[#D0BFBF] rounded-full text-[#7F5F5F] text-xs whitespace-nowrap">
               <div className="px-3 border-r border-[#D0BFBF] ">
                 <h2 >Approved</h2>
-                <p className="text-center text-black"> 24 </p>
+                <p className="text-center text-black"> 1 </p>
               </div>
               <div className="px-3 border-r border-[#D0BFBF]">
                 <h2>Declined</h2>
-                <p className="text-center text-black"> 24 </p>
+                <p className="text-center text-black"> 1 </p>
               </div>
               <div className="px-3">
                 <h2>In-review</h2>
-                <p className="text-center text-black"> 24 </p>
+                <p className="text-center text-black"> 2 </p>
               </div>
             </div>
           </div>

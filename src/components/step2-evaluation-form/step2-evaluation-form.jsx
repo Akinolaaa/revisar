@@ -14,7 +14,7 @@ const EvaluationForm = ( {toggle}) => {
 
       <div className="flex flex-col gap-2">
         
-        <RadioInput label={"Did you thoroughly review this paper"} options={["yes", "no"]}/>
+        <RadioInput label={"Did you thoroughly review this paper"} options={["yes", "no"]} />
 
         <RadioInput label={"Does the paper demonstrate an adequate understanding of the relevant literature in the field?"} options={["excellent", "good", "acceptable", "marginal", "poor" ]}/>
 

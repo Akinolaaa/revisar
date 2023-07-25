@@ -1,7 +1,8 @@
+import { useId } from "react";
 
 
 const RadioInput = ({ label, options }) => {
-
+  const inputId = useId();
 
   return (
     <div className="w-full text-xs">
@@ -10,9 +11,9 @@ const RadioInput = ({ label, options }) => {
         {
           options.map(option => {
             return(
-              <div key={label} className="flex items-center mt-1">
-                <input type="radio" name={label} id={label+option} value={option} />
-                <label className="capitalize ml-1" for={label+option}>{option}</label>
+              <div key={option+inputId} className="flex items-center mt-1">
+                <input type="radio" name={label} value={option} id={inputId} />
+                <label className="capitalize ml-1" htmlFor={inputId}>{option}</label>
               </div>
             )
           })

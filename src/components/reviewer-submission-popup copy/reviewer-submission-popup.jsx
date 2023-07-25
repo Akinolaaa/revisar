@@ -1,9 +1,9 @@
 import { useState } from "react";
 import SubmissionGuidlines from "../step1-submission-guidelines/step1-submission-guidelines";
-import ManuscriptDetails from "../step2-manuscript-details/step2-manuscript-details";
-// import EvaluationForm from "../step2-evaluation-form/step2-evaluation-form";
+// import ManuscriptDetails from "../step2-manuscript-details/step2-manuscript-details";
+import EvaluationForm from "../step2-evaluation-form/step2-evaluation-form";
 
-const SubmissionPopup = ({ toggle }) => {
+const ReviewerSubmissionPopup = ({ toggle }) => {
   const [ isStep1, setIsStep ] = useState(true);
 
   const changeStep = () => setIsStep(!isStep1)
@@ -15,11 +15,11 @@ const SubmissionPopup = ({ toggle }) => {
         isStep1  ?
         <SubmissionGuidlines toggle={toggle} changeStep={changeStep} />
         :
-        <ManuscriptDetails toggle={toggle} />
+        <EvaluationForm toggle={toggle} />
       }
     </div>
 
   )
 }
 
-export default SubmissionPopup;
+export default ReviewerSubmissionPopup;
