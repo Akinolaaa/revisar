@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch, useSelector } from 'react-redux';
 import JournalsDashboardTableEntry from '../journals-dashboard-table-entry/journals-dashboard-table-entry';
-import { getAllArticles } from '../../api/api';
-import { selectCurrentUserToken } from '../../store/user/user.selector';
+import { getArticlesByUserId } from '../../api/api';
+import { selectCurrentUserToken, selectCurrentUser } from '../../store/user/user.selector';
+import { selectArticles } from '../../store/articles/articles.selector';
+import { setArticles } from '../../store/articles/articles.slice';
 
 const JournalsDashboardTable = () => {
-  const [ journals, setJournals ] = useState([]);
   const token = useSelector(selectCurrentUserToken);
+  const user = useSelector(selectCurrentUser);
+  // const journals = useSelector(selectArticles);
+  const [ journals, setJournals ] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData(){
-      const j = await getAllArticles("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGJkNmRhNzViNzAyMTZhYjgxY2VkNjciLCJuYW1lIjoiRWlyZW5lIE95YWtoaWxvbWUiLCJyb2xlIjoiZWRpdG9yIiwiaWF0IjoxNjkwMTM2MDkzLCJleHAiOjE2OTI3MjgwOTN9.6oBtN7QypfvARzeFUzKvneOy04yxSM8BPxZbR9NUTcQ");
-      console.log(j);
+      const j = await getArticlesByUserId(user.id, token);
+      if(j){
+        setJournals(j)
+      }
     }
     fetchData();
   }, [])
@@ -26,10 +33,9 @@ const JournalsDashboardTable = () => {
         <span className="col-span-1"></span>
       </div>
 
-      <JournalsDashboardTableEntry />
-      <JournalsDashboardTableEntry />
-      <JournalsDashboardTableEntry />
-      <JournalsDashboardTableEntry />
+      {
+        journals && journals.map(journal => <JournalsDashboardTableEntry key={journal._id} journal={journal} />)
+      }
     
     </div>
   )

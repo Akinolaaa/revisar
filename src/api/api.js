@@ -44,3 +44,16 @@ export const submitArticle = async(formData, token) => {
     console.log("unable to submit form", err);
   }
 }
+
+export const getArticlesByUserId = async(userId, token) => {
+  try {
+    const res = await api.get(apiUrls.articles.getArticlesByUserId(userId), {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return res.data;
+  } catch(err) {
+    console.log("unable to get articles by userId", err);
+  }
+} 

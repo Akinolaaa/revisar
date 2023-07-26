@@ -17,7 +17,7 @@ const DefaultDashboard = () => {
       <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
-          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> Eirene </h1>
+          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {name.split(" ")[0]} </h1>
           <p className="text-xs text-[#7F5F5F]">
             Welcome to your dashboard. Create, manage, and share your manuscripts for review from your peers
           </p>

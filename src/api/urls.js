@@ -8,5 +8,6 @@ export const apiUrls = {
     getAllArticles: '/articles/getAllArticles',
     getArticle: (id) => `/articles/${id}`,
     submitArticle: '/articles/submitArticle',
+    getArticlesByUserId: (userId) => `/articles/user/${userId}`
   },
 }
