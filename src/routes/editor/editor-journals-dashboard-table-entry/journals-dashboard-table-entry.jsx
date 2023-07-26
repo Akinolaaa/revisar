@@ -6,7 +6,7 @@ const EditorJournalsDashboardTableEntry = ({journal}) => {
   const navigate = useNavigate();
   
   const handleClick = async() => {
-    navigate(`/editor/page2/`);
+    navigate(`/editor/page2/${_id}`);
   }
 
   return (

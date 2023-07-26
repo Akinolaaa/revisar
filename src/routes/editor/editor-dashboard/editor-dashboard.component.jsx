@@ -12,6 +12,17 @@ const EditorDashboard = () => {
   const { name } = useSelector(selectCurrentUser);
   const tooglePopUp = () => setShowPopup(!showPopup)
 
+  // useEffect(() => {
+  //   async function fetchData(){
+  //     const j = await getAllArticles(token);
+  //     console.log(j);
+  //     if(j){
+  //       // setJournals(j);
+  //       dispatch(setArticles(j))
+  //     }
+  //   }
+  //   fetchData();
+  // }, [])
   return (
     <div>
       { showPopup && <SubmissionPopup className="hidden" toogle={ tooglePopUp }/> }

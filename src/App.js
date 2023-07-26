@@ -4,7 +4,7 @@ import Authentication from './routes/authentication/authentication.component';
 import DefaultDashboard from './routes/default/default-dashboard/default-dashboard.component';
 import EditorDashboard from './routes/editor/editor-dashboard/editor-dashboard.component';
 import ReviewerDashboard from './routes/reviewer/reviewer-dashboard/reviewer-dashboard.component';
-import EditorDashboardPage2 from './routes/editor/editor-dashboard-page2 copy/editor-dashboard-page2.component';
+import EditorDashboardPage2 from './routes/editor/editor-dashboard-page2/editor-dashboard-page2.component';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path='/dash' element={<DefaultDashboard />} />
         <Route path='/editor' >
           <Route index element={<EditorDashboard />}/>
-          <Route path='/editor/page2/' element={<EditorDashboardPage2 />} />
+          <Route path='/editor/page2/:id' element={<EditorDashboardPage2 />} />
         </Route>
         <Route path='/reviewer'>
           <Route index element={<ReviewerDashboard />}/>

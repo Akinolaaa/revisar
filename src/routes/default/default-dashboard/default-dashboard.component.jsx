@@ -9,7 +9,7 @@ import displayPic from "../../../assets/display-pic.svg";
 const DefaultDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
   const { name } = useSelector(selectCurrentUser);
-  const togglePopUp = () => setShowPopup(!showPopup)
+  const togglePopUp = () => setShowPopup(!showPopup);
 
   return (
     <div>

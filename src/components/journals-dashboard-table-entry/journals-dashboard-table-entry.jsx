@@ -14,7 +14,7 @@ const JournalsDashboardTableEntry = ({journal}) => {
       </div>
       <span className="col-span-1"> {status} </span>
       <span className="col-span-1"> {createdAt.split(":")[0].slice(0,10)}</span>
-      <a href={fileUrl}>
+      <a href={fileUrl} target="_blank" rel="noreferrer">
         <p className="text-[#D3455B] text-center text-xs border border-[#D3455B] rounded w-4/6 px-2 py-1 " onClick={handleClick}>
           View
         </p>
