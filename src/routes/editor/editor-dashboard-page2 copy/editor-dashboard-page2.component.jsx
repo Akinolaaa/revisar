@@ -2,8 +2,8 @@ import { BiSolidFilePdf } from "react-icons/bi";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
 import EditorTakeAction from "../editor-take-action/editor-take-action.component";
 
-const EditorDashboardPage2 = () => {
-  
+const EditorDashboardPage2 = ({ article }) => {
+  const fileUrl = "";
 
   return (
     <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
@@ -26,6 +26,11 @@ const EditorDashboardPage2 = () => {
       <div className="col-span-2 flex gap-1 items-center text-black text-xs"> 
         <BiSolidFilePdf size={"1rem"} color='red' />
         <p>Image Caption Generation using CNN</p>
+        <a href={fileUrl}>
+          <p className="text-[#D3455B] text-center text-xs  ">
+            View
+          </p>
+        </a>
       </div>
 
       <br />

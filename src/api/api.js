@@ -23,10 +23,14 @@ export const signUpUser = async (signUpOptions) => {
   }
 }
 
-export const getAllArticles = async() => {
+export const getAllArticles = async(token) => {
   try {
-    const articles = await api.get(apiUrls.articles.getAllArticles);
-    return articles;
+    const res = await api.get(apiUrls.articles.getAllArticles, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+  });
+    return res.data.articles;
   } catch (err) {
     console.log("unable to get all articles", err)
   }

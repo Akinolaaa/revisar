@@ -15,7 +15,7 @@ function App() {
         <Route path='/dash' element={<DefaultDashboard />} />
         <Route path='/editor' >
           <Route index element={<EditorDashboard />}/>
-          <Route path='/editor/page2' element={<EditorDashboardPage2 />} />
+          <Route path='/editor/page2/' element={<EditorDashboardPage2 />} />
         </Route>
         <Route path='/reviewer'>
           <Route index element={<ReviewerDashboard />}/>
