@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/user/user.selector";
+import { selectPendingArticlesCount, selectApprovedArticlesCount } from "../../../store/articles/articles.selector";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
 // import JournalsDashboardSection from "../../journals-dashboard-section/journals-dashboard-section";
 import EditorJournalsDashboardSection from "../editor-journals-dashboard-section/editor-journals-dashboard-section"
@@ -10,6 +11,8 @@ import displayPic from "../../../assets/display-pic.svg";
 const EditorDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
   const { name } = useSelector(selectCurrentUser);
+  const pending = useSelector(selectPendingArticlesCount);
+  const approved = useSelector(selectApprovedArticlesCount);
   const tooglePopUp = () => setShowPopup(!showPopup)
 
   // useEffect(() => {
@@ -51,11 +54,11 @@ const EditorDashboard = () => {
           <div className="flex p-1 border border-[#D0BFBF] rounded-full text-[#7F5F5F] text-xs whitespace-nowrap">
             <div className="px-3 border-r border-[#D0BFBF] ">
               <h2 >Pending Reviews</h2>
-              <p className="text-center text-black"> 24 </p>
+              <p className="text-center text-black"> {pending} </p>
             </div>
             <div className="px-3">
               <h2>Reviewed Papers</h2>
-              <p className="text-center text-black"> 24 </p>
+              <p className="text-center text-black"> {approved} </p>
             </div>
           </div>
         </div>

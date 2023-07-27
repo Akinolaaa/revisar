@@ -12,7 +12,7 @@ const ReviewerDashboard = () => {
 
   return (
     <div>
-      { showPopup && <ReviewerSubmissionPopup className="hidden" toogle={ togglePopUp }/> }
+      { showPopup && <ReviewerSubmissionPopup className="hidden" toggle={ togglePopUp }/> }
       <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">

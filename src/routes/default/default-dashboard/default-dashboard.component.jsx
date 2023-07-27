@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/user/user.selector";
+import { selectPendingArticlesCount, selectApprovedArticlesCount,selectRejectedArticlesCount } from "../../../store/articles/articles.selector";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
 import JournalsDashboardSection from "../../../components/journals-dashboard-section/journals-dashboard-section";
 import SubmissionPopup from "../../../components/submission-popup/submission-popup";
@@ -9,6 +10,9 @@ import displayPic from "../../../assets/display-pic.svg";
 const DefaultDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
   const { name } = useSelector(selectCurrentUser);
+  const pending = useSelector(selectPendingArticlesCount);
+  const approved = useSelector(selectApprovedArticlesCount);
+  const rejected = useSelector(selectRejectedArticlesCount);
   const togglePopUp = () => setShowPopup(!showPopup);
 
   return (
@@ -38,16 +42,16 @@ const DefaultDashboard = () => {
             </div>
             <div className="flex p-1 border border-[#D0BFBF] rounded-full text-[#7F5F5F] text-xs whitespace-nowrap">
               <div className="px-3 border-r border-[#D0BFBF] ">
-                <h2 >Approved</h2>
-                <p className="text-center text-black"> 1 </p>
+                <h2>Approved</h2>
+                <p className="text-center text-black"> {approved} </p>
               </div>
               <div className="px-3 border-r border-[#D0BFBF]">
                 <h2>Declined</h2>
-                <p className="text-center text-black"> 1 </p>
+                <p className="text-center text-black"> {rejected} </p>
               </div>
               <div className="px-3">
                 <h2>In-review</h2>
-                <p className="text-center text-black"> 2 </p>
+                <p className="text-center text-black"> {pending} </p>
               </div>
             </div>
           </div>

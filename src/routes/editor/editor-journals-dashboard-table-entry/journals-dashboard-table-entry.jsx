@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { BiSolidFilePdf } from 'react-icons/bi'
+import Status from '../../../components/status/status.component';
 
 const EditorJournalsDashboardTableEntry = ({journal}) => {
   const { _id, title, status, createdAt } = journal;
@@ -16,9 +17,9 @@ const EditorJournalsDashboardTableEntry = ({journal}) => {
         <BiSolidFilePdf size={"1.2rem"} color='red' />
         <p className='capitalize'>{title}</p>
       </div>
-      <span className="col-span-1"> {status} </span>
+      <Status status={status} />
       <span className="col-span-1"> {createdAt.split(":")[0].slice(0,10)}</span>
-      <p className="text-[#D3455B] text-center text-xs border border-[#D3455B] rounded w-4/6 px-2 py-1 " onClick={handleClick}>
+      <p className="cursor-pointer text-[#D3455B] text-center text-xs border border-[#D3455B] rounded w-4/6 px-2 py-1 " onClick={handleClick}>
         Assess
       </p>
     </div>
