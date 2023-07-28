@@ -1,15 +1,10 @@
-// import { loginUser } from "../../api/api";
-// import { setCurrentUserFailed, setCurrentUserStart, setCurrentUserSuccess } from "./articles.slice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import  { getArticlesByUserId } from "../../api/api";
 
-// // const navigate = useNavigate();
-// export const setCurrentUserAsync = (email, password) => async(dispatch) => {
-//   dispatch(setCurrentUserStart());
-//   try {
-//     const user = await loginUser(email, password);
-//     dispatch(setCurrentUserSuccess(user));
-//     // navigate("./dash");
-//   } catch(err){
-//     dispatch(setCurrentUserFailed(err))
-//     console.log("login failed", err)
-//   }
-// }
+export const fetchArticlesByUser = createAsyncThunk(
+  'articles/fetchAllArticles',
+  async ({userId, token}, thunkAPI) => {
+    const response = await getArticlesByUserId(userId,token);
+    return response;
+  }
+)

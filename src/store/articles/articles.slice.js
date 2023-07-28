@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchArticlesByUser } from './articles.thunk';
 
 const INITIAL_STATE = {
   articles: [],
@@ -13,8 +14,20 @@ export const articlesSlice = createSlice({
     setArticles(state, action) {
       state.articles = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchArticlesByUser.fulfilled, (state, action) => {
+      state.articles = action.payload;
+      state.isLoading = false;
+    })
+    builder.addCase(fetchArticlesByUser.pending, (state, action) => {
+      state.isLoading = true;
+    })
+    builder.addCase(fetchArticlesByUser.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    })
   }
-
 });
 
 export const { setArticles } = articlesSlice.actions;

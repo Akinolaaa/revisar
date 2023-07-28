@@ -1,10 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { declineAnArticle, getReviewersByField } from "../../../api/api";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUserToken } from "../../../store/user/user.selector";
+import { assignReviewers } from "../../../api/api";
 
-const EditorTakeAction = () => {
+const EditorTakeAction = ({article}) => {
   const [ action, setAction ] = useState("");
+  const [ reviewers, setReviewers ] = useState([]);
+  const [ selectedReviewers, setSelectedReviewers ] = useState([]);
+  const { _id:articleId, fieldOfResearch } = article;
+  const navigate = useNavigate();
+  const userToken = useSelector(selectCurrentUserToken);
+
+
+  useEffect(() => {
+    async function fetchData(){
+      const j = await getReviewersByField(fieldOfResearch, userToken);
+      console.log(j);
+      if(j){
+        setReviewers(j);
+      }
+    }
+    fetchData();
+  },[fieldOfResearch, userToken])
 
   const handleChange = (event) => {
     setAction(event.target.id);
+  }
+
+  const handleSelectReviewer = (event) => {
+    setSelectedReviewers([...selectedReviewers, event.target.value])
+  }
+
+  const handleAssignReviewers = async() => {
+    try {
+      const res = await assignReviewers(selectedReviewers, articleId, userToken);
+      if(res) {
+        alert("Reviewers assigned to paper successfully");
+        navigate('/editor');
+      }
+    } catch (error) {
+      console.error("error occured while trying to assign reviewers")
+    }
+  }
+
+  const handleDecline = async() => {
+    try {
+      const res = await declineAnArticle(articleId, userToken);
+      console.log(articleId, userToken)
+      if(res) {
+        alert("You just declined this article");
+        navigate('/editor');
+      }
+    } catch (error) {
+      console.error("Wahala wa")
+    }
   }
 
   return(
@@ -29,6 +80,22 @@ const EditorTakeAction = () => {
           action === "yes" && 
           <div>
             <p className="text-[#7F5F5F] text-sm"> Assign to a reviewer</p>
+            {
+              reviewers && reviewers.map(reviewer => 
+                <div key={reviewer._id}>
+                  <label className="text-xs">  
+                    <input type="radio" value={reviewer._id} onSelect={handleSelectReviewer}/>
+                    {reviewer.name}
+                  </label>
+              </div> || <p> No reviewers for this field of research at the moment</p>
+              )
+            }
+            {
+              reviewers &&
+              <button className="text-white text-sm text-center rounded px-4 py-1 my-1 bg-[#D3455B]" onClick={handleAssignReviewers} >
+                Assign Reviewer
+              </button>
+            }
           </div>
         }
       </div>
@@ -36,7 +103,7 @@ const EditorTakeAction = () => {
         {
           action === "no" && 
           <div className="flex justify-end" >
-            <button className="text-white text-sm text-center rounded px-4 py-1 my-1 bg-[#D3455B]" >
+            <button className="text-white text-sm text-center rounded px-4 py-1 my-1 bg-[#D3455B]" onClick={handleDecline} >
               Decline Paper
             </button>
           </div>

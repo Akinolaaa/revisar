@@ -8,7 +8,8 @@ import EditorTakeAction from "../editor-take-action/editor-take-action.component
 const EditorDashboardPage2 = () => {
   const articles = useSelector(selectArticles);
   const { id } = useParams();
-  const { title, abstract, fileUrl, createdAt, keywords, userId } = articles.find((article) => article._id === id);
+  const article = articles.find((article) => article._id === id);
+  const { title, abstract, fileUrl, createdAt, keywords, userId } = article;
 
   return (
     <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
@@ -42,7 +43,7 @@ const EditorDashboardPage2 = () => {
       <br />
 
       
-      <EditorTakeAction />
+      <EditorTakeAction article={article} />
 
     </div>
   )
