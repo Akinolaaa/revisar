@@ -23,14 +23,21 @@ const EditorTakeAction = ({article}) => {
       }
     }
     fetchData();
-  },[fieldOfResearch, userToken])
+  },[fieldOfResearch, userToken]);
 
   const handleChange = (event) => {
     setAction(event.target.id);
   }
 
   const handleSelectReviewer = (event) => {
-    setSelectedReviewers([...selectedReviewers, event.target.value])
+    if(selectedReviewers.includes(event.target.value)) {
+      const newSelectedReviewers = selectedReviewers.filter((reviewerId) => reviewerId !== event.target.value)
+      setSelectedReviewers(newSelectedReviewers);
+    } else {
+      const newSelectedReviewers = [...selectedReviewers];
+      newSelectedReviewers.push(event.target.value)
+      setSelectedReviewers(newSelectedReviewers);
+    }
   }
 
   const handleAssignReviewers = async() => {
@@ -43,6 +50,7 @@ const EditorTakeAction = ({article}) => {
     } catch (error) {
       console.error("error occured while trying to assign reviewers")
     }
+    
   }
 
   const handleDecline = async() => {
@@ -82,9 +90,9 @@ const EditorTakeAction = ({article}) => {
             <p className="text-[#7F5F5F] text-sm"> Assign to a reviewer</p>
             {
               reviewers && reviewers.map(reviewer => 
-                <div key={reviewer._id}>
-                  <label className="text-xs">  
-                    <input type="radio" value={reviewer._id} onSelect={handleSelectReviewer}/>
+                <div key={reviewer._id} >
+                  <label className="text-xs flex gap-2 items-center my-1">  
+                    <input type="checkbox" value={reviewer._id} onClick={handleSelectReviewer}/>
                     {reviewer.name}
                   </label>
               </div> || <p> No reviewers for this field of research at the moment</p>
