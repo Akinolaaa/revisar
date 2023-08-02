@@ -1,35 +1,27 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/user/user.selector";
-import { selectPendingArticlesCount, selectApprovedArticlesCount } from "../../../store/articles/articles.selector";
+import { selectStatusCount } from "../../../store/articles/articles.selector";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
-// import JournalsDashboardSection from "../../journals-dashboard-section/journals-dashboard-section";
-import EditorJournalsDashboardSection from "../editor-journals-dashboard-section/editor-journals-dashboard-section"
+import JournalsDashboardSection from "../journals-dashboard-section/editor-journals-dashboard-section"
 import SubmissionPopup from "../../../components/submission-popup/submission-popup";
 import displayPic from "../../../assets/display-pic.svg";
 
 const EditorDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
   const { name } = useSelector(selectCurrentUser);
-  const pending = useSelector(selectPendingArticlesCount);
-  const approved = useSelector(selectApprovedArticlesCount);
+  // const pending = useSelector(selectPendingArticlesCount);
+  const pending = useSelector(selectStatusCount("pending"));
+  const approved = useSelector(selectStatusCount("approved"));
   const tooglePopUp = () => setShowPopup(!showPopup)
 
-  // useEffect(() => {
-  //   async function fetchData(){
-  //     const j = await getAllArticles(token);
-  //     console.log(j);
-  //     if(j){
-  //       // setJournals(j);
-  //       dispatch(setArticles(j))
-  //     }
-  //   }
-  //   fetchData();
-  // }, [])
   return (
-    <div>
-      { showPopup && <SubmissionPopup className="hidden" toogle={ tooglePopUp }/> }
-      <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
+    <div className="relative left-1/2 -translate-x-1/2 w-full">
+      { 
+        showPopup && 
+        <SubmissionPopup className="hidden" toogle={ tooglePopUp }/> 
+      }
+      <div className="max-md:mx-0 px-10 max-md:px-5 py-2 max-w-full">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
           <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {name.split(" ")[0]} </h1>
@@ -70,7 +62,8 @@ const EditorDashboard = () => {
           <p className="px-1 py-2 border-b-2 border-[#D3455B]"> Authors </p>
           <p className="px-1 py-2 border-b-2 border-[#D3455B]"> Reviewers </p>
         </div>
-        <EditorJournalsDashboardSection />
+
+        <JournalsDashboardSection />
 
       </div>
     </div>

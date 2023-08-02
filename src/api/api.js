@@ -89,7 +89,7 @@ export const getArticlesByUserId = async(userId, token) => {
     })
     return res.data;
   } catch(err) {
-    console.log("unable to get articles by userId", err);
+    throw err;// console.log("unable to get articles by userId", err);
   }
 } 
 

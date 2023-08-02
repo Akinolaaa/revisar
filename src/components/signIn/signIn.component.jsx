@@ -2,10 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/formInput.component";
-import { loginUser } from "../../api/api";
-// import { fetchUserbyLogin } from "../../store/user/user.thunk";
-import { setCurrentUser } from '../../store/user/user.slice';
-// import { selectCurrentUser } from "../../store/user/user.selector";
+import { fetchUserbyLogin } from "../../store/user/user.thunk";
 
 const defaultFields = {
   email: "",
@@ -18,9 +15,6 @@ const SignIn = ({ authSwitch }) => {
   const { email, password } = signInFields;
   const navigate = useNavigate();
 
-  // const user = useSelector(selectCurrentUser);
-  // console.log(user);
-
   const resetSignInFields = () => setSignInFields(defaultFields);
 
   const handleChange = (event) =>{
@@ -31,12 +25,10 @@ const SignIn = ({ authSwitch }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await loginUser(email,password);
-      dispatch(setCurrentUser(user));
-      // await dispatch(fetchUserbyLogin({email,password}));
+      
+      const { user } = await dispatch(fetchUserbyLogin({email,password})).unwrap();
       resetSignInFields();
-      // navigate('/dash');
-      switch(user.user.role){
+      switch(user.role){
         case "reviewer":
           navigate('/reviewer');
           break;

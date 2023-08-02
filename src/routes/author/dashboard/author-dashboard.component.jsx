@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../store/user/user.selector";
-import { selectPendingArticlesCount, selectApprovedArticlesCount,selectRejectedArticlesCount } from "../../../store/articles/articles.selector";
+import { selectStatusCount } from "../../../store/articles/articles.selector";
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
-import JournalsDashboardSection from "../../../components/journals-dashboard-section/journals-dashboard-section";
+import JournalsDashboardSection from "../journals-dashboard-section/journals-dashboard-section";
 import SubmissionPopup from "../../../components/submission-popup/submission-popup";
 import displayPic from "../../../assets/display-pic.svg";
 
-const DefaultDashboard = () => {
+const AuthorDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
   const { name } = useSelector(selectCurrentUser);
-  const pending = useSelector(selectPendingArticlesCount);
-  const approved = useSelector(selectApprovedArticlesCount);
-  const rejected = useSelector(selectRejectedArticlesCount);
+  const pending = useSelector(selectStatusCount("pending"));
+  const approved = useSelector(selectStatusCount("approved"));
+  const rejected = useSelector(selectStatusCount("rejected"));
   const togglePopUp = () => setShowPopup(!showPopup);
 
   return (
-    <div>
+    <div className="px-2 sm:px-10">
       { showPopup && <SubmissionPopup className="hidden" toggle={ togglePopUp }/> }
-      <div className="mx-10 max-md:mx-0 px-10 max-md:px-2 py-2 min-w-min">
+      <div className="">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
           <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {name.split(" ")[0]} </h1>
@@ -29,8 +29,8 @@ const DefaultDashboard = () => {
 
         <br />
 
-        <div className="flex flex-wrap items-center justify-between">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex gap-2 items-center whitespace-nowrap">
               <img className="h-14 rounded-full" alt="dp" src={displayPic}/>
               <div>
@@ -69,4 +69,4 @@ const DefaultDashboard = () => {
   )
 }
 
-export default DefaultDashboard;
+export default AuthorDashboard;

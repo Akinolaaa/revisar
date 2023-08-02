@@ -17,7 +17,6 @@ const EditorTakeAction = ({article}) => {
   useEffect(() => {
     async function fetchData(){
       const j = await getReviewersByField(fieldOfResearch, userToken);
-      console.log(j);
       if(j){
         setReviewers(j);
       }

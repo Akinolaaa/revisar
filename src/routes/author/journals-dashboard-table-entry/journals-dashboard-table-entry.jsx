@@ -1,14 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import { BiSolidFilePdf } from 'react-icons/bi'
-import Status from '../../../components/status/status.component';
+import Status from '../../../components/status/status.component'
 
-const EditorJournalsDashboardTableEntry = ({journal}) => {
-  const { _id, title, status, createdAt } = journal;
-  const navigate = useNavigate();
+const JournalsDashboardTableEntry = ({journal}) => {
+  const { _id, title, status, createdAt, fileUrl } = journal;
   
-  const handleClick = async() => {
-    navigate(`/editor/page2/${_id}`);
-  }
+  const handleClick = () => {}
 
   return (
     <div className='grid grid-cols-6 gap-2 items-center w-full text-xs text-[#7F5F5F] py-1'>
@@ -19,11 +15,13 @@ const EditorJournalsDashboardTableEntry = ({journal}) => {
       </div>
       <Status status={status} />
       <span className="col-span-1"> {createdAt.split(":")[0].slice(0,10)}</span>
-      <p className="cursor-pointer text-[#D3455B] text-center text-xs border border-[#D3455B] rounded w-4/6 px-2 py-1 " onClick={handleClick}>
-        Assess
-      </p>
+      <a href={fileUrl} target="_blank" rel="noreferrer">
+        <p className="text-[#D3455B] text-center text-xs border border-[#D3455B] rounded w-4/6 px-2 py-1 " onClick={handleClick}>
+          View
+        </p>
+      </a>
     </div>
   )
 }
 
-export default EditorJournalsDashboardTableEntry;
+export default JournalsDashboardTableEntry;
