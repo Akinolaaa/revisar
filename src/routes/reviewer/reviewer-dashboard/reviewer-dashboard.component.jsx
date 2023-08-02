@@ -1,5 +1,5 @@
 import DashboardNav from "../../../components/navigation/dashboard-nav.component";
-import JournalsDashboardSection from "../../../components/journals-dashboard-section/journals-dashboard-section";
+import JournalsDashboardSection from "../../author/journals-dashboard-section/journals-dashboard-section";
 import ReviewerSubmissionPopup from "../../../components/reviewer-submission-popup copy/reviewer-submission-popup";
 import displayPic from "../../../assets/display-pic.svg";
 import { useState } from "react";

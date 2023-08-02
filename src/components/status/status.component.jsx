@@ -21,6 +21,6 @@ export default function Status({status}) {
   } 
 
   return (
-    <p className={`${color} px-2 py-1 leading-4 text-white text-xs whitespace-nowrap max-w-min rounded-full`}>{status}</p>
+    <p className={`${color} px-2 py-1 leading-4 text-white text-xs whitespace-nowrap min-w-min max-w-min rounded-full`}>{status}</p>
   )
 }

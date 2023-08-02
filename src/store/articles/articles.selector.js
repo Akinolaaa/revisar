@@ -4,48 +4,13 @@ const selectArticlesSlice = (state) => state.articles;
 
 export const selectArticles = createSelector([selectArticlesSlice], (articles) => articles.articles);
 
-export const selectPendingArticlesCount = createSelector(
+export const selectStatusCount = (status) => createSelector(
   [selectArticles],
   (articles) => articles.reduce((acc, article) => {
-    if (article.status === "pending") {
+    if (article.status === status) {
       acc += 1;
     }
     return acc;
   }, 0)
 );
-export const selectRejectedArticlesCount = createSelector(
-  [selectArticles],
-  (articles) => articles.reduce((acc, article) => {
-    if (article.status === "rejected") {
-      acc += 1;
-    }
-    return acc;
-  }, 0)
-);
-export const selectApprovedArticlesCount = createSelector(
-  [selectArticles],
-  (articles) => articles.reduce((acc, article) => {
-    if (article.status === "approved") {
-      acc += 1;
-    }
-    return acc;
-  }, 0)
-);
-export const selectAssignedArticlesCount = createSelector(
-  [selectArticles],
-  (articles) => articles.reduce((acc, article) => {
-    if (article.status === "assigned") {
-      acc += 1;
-    }
-    return acc;
-  }, 0)
-);
-export const selectInReviewArticlesCount = createSelector(
-  [selectArticles],
-  (articles) => articles.reduce((acc, article) => {
-    if (article.status === "in-review") {
-      acc += 1;
-    }
-    return acc;
-  }, 0)
-);
+
