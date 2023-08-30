@@ -6,10 +6,11 @@ import DashboardNav from "../../../components/navigation/dashboard-nav.component
 import JournalsDashboardSection from "../journals-dashboard-section/journals-dashboard-section";
 import SubmissionPopup from "../../../components/submission-popup/submission-popup";
 import displayPic from "../../../assets/display-pic.svg";
+// import { useNavigate } from "react-router-dom";
 
 const AuthorDashboard = () => {
+  const user = useSelector(selectCurrentUser);
   const [ showPopup, setShowPopup ] = useState(false);
-  const { name } = useSelector(selectCurrentUser);
   const pending = useSelector(selectStatusCount("pending"));
   const approved = useSelector(selectStatusCount("approved"));
   const rejected = useSelector(selectStatusCount("rejected"));
@@ -21,7 +22,7 @@ const AuthorDashboard = () => {
       <div className="">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
-          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {name.split(" ")[0]} </h1>
+          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {user?.name.split(" ")[0] || 'nil'} </h1>
           <p className="text-xs text-[#7F5F5F]">
             Welcome to your dashboard. Create, manage, and share your manuscripts for review from your peers
           </p>
@@ -34,7 +35,7 @@ const AuthorDashboard = () => {
             <div className="flex gap-2 items-center whitespace-nowrap">
               <img className="h-14 rounded-full" alt="dp" src={displayPic}/>
               <div>
-                <h2 className="capitalize"> { name } </h2>
+                <h2 className="capitalize"> { user?.name || 'none' } </h2>
                 <p className="text-xs text-[#7F5F5F]">
                   <span className="pr-1"> Computer Science </span> <span className="pl-1 border-l border-[#D0BFBF] "> Science </span>
                 </p>

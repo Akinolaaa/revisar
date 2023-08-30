@@ -9,7 +9,7 @@ import displayPic from "../../../assets/display-pic.svg";
 
 const EditorDashboard = () => {
   const [ showPopup, setShowPopup ] = useState(false);
-  const { name } = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
   // const pending = useSelector(selectPendingArticlesCount);
   const pending = useSelector(selectStatusCount("pending"));
   const approved = useSelector(selectStatusCount("approved"));
@@ -24,7 +24,7 @@ const EditorDashboard = () => {
       <div className="max-md:mx-0 px-10 max-md:px-5 py-2 max-w-full">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
-          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {name.split(" ")[0]} </h1>
+          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {user?.name.split(" ")[0]} </h1>
           <p className="text-xs text-[#7F5F5F]">
             Welcome to your dashboard. Create, manage, and share your manuscripts for review from your peers
           </p>
@@ -37,7 +37,7 @@ const EditorDashboard = () => {
           <div className="flex gap-2 items-center whitespace-nowrap">
             <img className="h-14 rounded-full" alt="dp" src={displayPic}/>
             <div>
-              <h2 className="capitalize"> { name } </h2>
+              <h2 className="capitalize"> user?.name</h2>
               <p className="text-xs text-[#7F5F5F]">
                 <span className="pr-1"> Computer Science </span> <span className="pl-1 border-l border-[#D0BFBF] "> Science </span>
               </p>

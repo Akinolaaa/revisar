@@ -7,7 +7,8 @@ import { BiChevronDown } from "react-icons/bi";
 import displayPic from "../../assets/display-pic.svg";
 
 const DashboardNav = () => {
-  const { name, role } = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
+
   return(
     <div className="flex justify-between items-center my-4 mb-10">
       <Logo />
@@ -21,8 +22,8 @@ const DashboardNav = () => {
         <div className="flex items-center gap-2 justify-between">
           <img className="h-8 rounded-full" alt="dp" src={displayPic}/>
           <div>
-            <h1 className="text-sm capitalize"> {name} </h1>
-            <p className="text-xs text-[#D0BFBF] capitalize"> {role} </p>
+            <h1 className="text-sm capitalize"> {user?.name} </h1>
+            <p className="text-xs text-[#D0BFBF] capitalize"> {user?.role} </p>
           </div>
           <BiChevronDown size={"1.2em"}/>
         </div>

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchUserbyLogin } from './user.thunk';
 
+
 const INITIAL_STATE = {
   currentUser: null,
   isLoading: false,

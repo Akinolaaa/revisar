@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {selectCurrentUserToken} from '../../store/user/user.selector';
 import Dropdown from "../dropdown/dropdown.component";
 import FormInput from "../form-input/formInput.component";
-import {submitArticle} from "../../api/api.js";
+import {submitArticle} from "../../api/api";
 
 const defaultFields = {
   typeOfReview: "",

@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: `http://localhost:3000/api/v1/`,
 });
 
-export const loginUser = async (email, password) => {
+export const loginUser = async (email: string, password: string) => {
   try {
     let res = await api.post(apiUrls.user.loginUser,{ email, password });
     return res.data;
@@ -14,7 +14,7 @@ export const loginUser = async (email, password) => {
   }
 }
 
-export const signUpUser = async (signUpOptions) => {
+export const signUpUser = async (signUpOptions: any) => {
   try {
     let res = await api.post(apiUrls.user.signupUser, {...signUpOptions});
     return res.data;
@@ -23,7 +23,7 @@ export const signUpUser = async (signUpOptions) => {
   }
 }
 
-export const getReviewersByField = async (field, token) => {
+export const getReviewersByField = async (field: string, token:string) => {
   try {
     let res = await api.get(apiUrls.user.getReviewersByField(field),{
       headers: {
@@ -36,7 +36,7 @@ export const getReviewersByField = async (field, token) => {
   }
 }
 
-export const assignReviewers = async (reviewers, articleId, token) => {
+export const assignReviewers = async (reviewers:string[], articleId:string, token:string) => {
   try {
     let res = await api.post(apiUrls.articles.assignReviewers(articleId),{
       reviewerIds: reviewers
@@ -54,7 +54,7 @@ export const assignReviewers = async (reviewers, articleId, token) => {
 
 // Articles
 
-export const getAllArticles = async(token) => {
+export const getAllArticles = async(token:string) => {
   try {
     const res = await api.get(apiUrls.articles.getAllArticles, {
       headers: {
@@ -67,7 +67,7 @@ export const getAllArticles = async(token) => {
   }
 }
 
-export const submitArticle = async(formData, token) => {
+export const submitArticle = async(formData: any, token: string) => {
   try {
     const res = await api.post(apiUrls.articles.submitArticle, formData,{
       headers: {
@@ -80,7 +80,7 @@ export const submitArticle = async(formData, token) => {
   }
 }
 
-export const getArticlesByUserId = async(userId, token) => {
+export const getArticlesByUserId = async(userId: string, token: string) => {
   try {
     const res = await api.get(apiUrls.articles.getArticlesByUserId(userId), {
       headers: {
@@ -93,7 +93,7 @@ export const getArticlesByUserId = async(userId, token) => {
   }
 } 
 
-export const declineAnArticle = async(articleId, token) => {
+export const declineAnArticle = async(articleId: string, token: string) => {
   try {
     const res = await api.put(apiUrls.articles.declineAnArticle(articleId),{
       status: "decline"
