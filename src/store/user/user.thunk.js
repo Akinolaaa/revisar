@@ -7,7 +7,8 @@ export const fetchUserbyLogin = createAsyncThunk(
   'user/fetchByEmailPassword',
   async ({ email, password }, thunkAPI) => {
     const res = await loginUser(email,password);
-    const {user, token} = res
+    const {user} = res.user
+    const {token} = res
     const { role, id } = user
     switch(role){
         case "reviewer":
