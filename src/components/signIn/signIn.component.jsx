@@ -26,7 +26,7 @@ const SignIn = ({ authSwitch }) => {
     event.preventDefault();
     try {
       
-      const { user } = await dispatch(fetchUserbyLogin({email,password})).unwrap();
+      const user = await dispatch(fetchUserbyLogin({email,password})).unwrap();
       resetSignInFields();
       switch(user.role){
         case "reviewer":

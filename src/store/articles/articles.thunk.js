@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import  { getArticlesByUserId, getAllArticles } from "../../api/api";
 
 export const fetchArticlesByUser = createAsyncThunk(
-  'articles/fetchByUserId',
+  'articles/fetchArticlesByUserId',
   async ({userId, token}, thunkAPI) => {
     const response = await getArticlesByUserId(userId, token);
     return response;

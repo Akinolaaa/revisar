@@ -12,9 +12,7 @@ const JournalsLandingSection = () => {
         }
       </div>
       <br />
-
     </div>
-
   )
 }
 

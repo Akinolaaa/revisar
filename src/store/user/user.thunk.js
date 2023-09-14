@@ -1,4 +1,3 @@
-
 import { loginUser } from "../../api/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchAllArticles, fetchArticlesByUser } from "../articles/articles.thunk";
@@ -7,8 +6,9 @@ export const fetchUserbyLogin = createAsyncThunk(
   'user/fetchByEmailPassword',
   async ({ email, password }, thunkAPI) => {
     const res = await loginUser(email,password);
-    const {user} = res.user
-    const {token} = res
+    // console.log(res)
+    const { user, token } = res;
+    console.log(user)
     const { role, id } = user
     switch(role){
         case "reviewer":
@@ -18,11 +18,10 @@ export const fetchUserbyLogin = createAsyncThunk(
           await thunkAPI.dispatch(fetchAllArticles(token))
           break;
         default: 
-          // navigate('/dash');
           await thunkAPI.dispatch(fetchArticlesByUser({userId: id, token}))
           break;
       } 
-    return res;
+    return {...user, token};
   }
 )
 
