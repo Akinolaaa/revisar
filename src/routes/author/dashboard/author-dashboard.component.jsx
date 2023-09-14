@@ -22,7 +22,7 @@ const AuthorDashboard = () => {
       <div className="">
         <DashboardNav />
         <div className="w-1/3 max-md:w-5/6">
-          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {user?.name|| 'nil'} </h1>
+          <h1 className="text-2xl font-semibold leading-10"><span className="whitespace-nowrap">Welcome back, </span> {user?.name.split(" ")[0]|| 'nil'} </h1>
           <p className="text-xs text-[#7F5F5F]">
             Welcome to your dashboard. Create, manage, and share your manuscripts for review from your peers
           </p>
